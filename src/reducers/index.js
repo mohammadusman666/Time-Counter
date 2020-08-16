@@ -15,7 +15,7 @@ export default (state, action) => {
             const decStateValue = state.activeSession.toLowerCase();
             return {
                 ...state,
-                [decStateValue]: state[decStateValue] - 1,
+                [decStateValue]: Math.max(0, state[decStateValue] - 1),
             }
         default:
             return state;
