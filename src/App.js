@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import store from "./store";
-import setActiveSession from "./actions";
+import { setActiveSession, setCounter } from "./actions";
 
 class App extends Component {
   render() {
@@ -12,6 +12,11 @@ class App extends Component {
       const value = event.target.value;
       store.dispatch(setActiveSession(value));
     };
+
+    const handleCounter = (event) => {
+      const countType = event.target.dataset.type;
+      store.dispatch(setCounter(countType));
+    }
 
     return (
       <div className="App">
@@ -75,10 +80,10 @@ class App extends Component {
             </div>
           </main>
           <div className="App__buttons">
-            <button className="App__text--white" data-type="INCREASE_COUNTER">
+            <button className="App__text--white" data-type="INCREASE_COUNTER" onClick={ handleCounter }>
               INCREASE
             </button>
-            <button className="App__text--white" data-type="DECREASE_COUNTER">
+            <button className="App__text--white" data-type="DECREASE_COUNTER" onClick={ handleCounter }>
               DECREASE
             </button>
           </div>
