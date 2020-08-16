@@ -1,20 +1,18 @@
 import React, { Component } from "react";
 import "./App.css";
 
-class App extends Component {
-  state = {
-    days: 11,
-    hours: 31,
-    minutes: 27,
-    seconds: 11,
-    activeSession: "DAYS"
-  };
+import store from "./store";
+import setActiveSession from "./actions";
 
+class App extends Component {
   render() {
-    const { days, hours, minutes, seconds, activeSession } = this.state;
-    const setActiveSession = e => {
-      this.setState({ activeSession: e.target.value });
+    const { days, hours, minutes, seconds, activeSession } = store.getState();
+
+    const onChangeActiveSession = (event) => {
+      const value = event.target.value;
+      store.dispatch(setActiveSession(value));
     };
+
     return (
       <div className="App">
         <header>
@@ -30,8 +28,8 @@ class App extends Component {
               <span className="Counter__text--grey">ACTIVE SESSION: </span>
               <select
                 className="Counter__text--grey"
-                onChange={setActiveSession}
-                value={activeSession}
+                onChange={ onChangeActiveSession }
+                value={ activeSession }
               >
                 <option>DAYS</option>
                 <option>HOURS</option>
@@ -43,7 +41,7 @@ class App extends Component {
             <div className="Counter--main__values">
               <div>
                 <span className="App__text--white Counter__text--large">
-                  {days}
+                  { days }
                 </span>
                 <span className="Counter__text--grey">DAYS</span>
               </div>
@@ -52,7 +50,7 @@ class App extends Component {
 
               <div>
                 <span className="App__text--white Counter__text--large">
-                  {hours}
+                  { hours }
                 </span>
                 <span className="Counter__text--grey">HOURS</span>
               </div>
@@ -61,7 +59,7 @@ class App extends Component {
 
               <div>
                 <span className="App__text--white Counter__text--large">
-                  {minutes}
+                  { minutes }
                 </span>
                 <span className="Counter__text--grey">MINUTES</span>
               </div>
@@ -70,7 +68,7 @@ class App extends Component {
 
               <div>
                 <span className="App__text--white Counter__text--large">
-                  {seconds}
+                  { seconds }
                 </span>
                 <span className="Counter__text--grey">SECONDS</span>
               </div>
